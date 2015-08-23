@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Obstacle : MonoBehaviour 	
 {
+	public bool exploded = false;
+
 	Animator animator;
 
 	void Start()
@@ -13,12 +15,17 @@ public class Obstacle : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D hitcheck)
 	{
 		if (hitcheck.name == "Monster")
-		{
+		{	
+			exploded = true;
 			GameObject.Find("GameManager").GetComponent<GameManager>().life -= 1;
 			Debug.Log (GameObject.Find("GameManager").GetComponent<GameManager>().life);
-			animator.SetBool("exploded",true);
+
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		}
+	}
+
+	void Update(){
+		animator.SetBool("exploded",exploded);
 	}
 
 }
