@@ -9,10 +9,12 @@ public bool isMoving;
 float playerX;
 float playerY;
 public float jumpForce = 5;
-	public static bool isHurt = false;
+	public float dashForce = 3;
+	public bool isHurt = false;
+	public bool isDashing = false;
 	public LayerMask groundMovPlataform;
 	float VelocityEnY;
-
+	float VelocityEnX;
 
 	public void KillEnemy(){
 		VelocityEnY = Mathf.Abs(gameObject.GetComponent<Rigidbody2D> ().velocity.y);
@@ -24,14 +26,14 @@ public float jumpForce = 5;
 	}
 
 
-	public void HurtL(){
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(-10, 0f),ForceMode2D.Impulse);
+	public void Hurt(){
+		isHurt = true;
+		isDashing = true;
+		StartCoroutine(Wait());
+		StartCoroutine(WaitHurt());
+		GetComponent<Rigidbody2D>().AddForce(new Vector2(-VelocityEnX/2, 0f),ForceMode2D.Impulse);
 	}
-
-	public void HurtR(){
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(10, 0f),ForceMode2D.Impulse);
-	}
-
+	
 
 	void movePlayer(){
 
@@ -48,6 +50,21 @@ public float jumpForce = 5;
 			gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (horizontalAxis, gameObject.GetComponent<Rigidbody2D> ().velocity.y);
 			//FlipSprite ();
 		}
+
+
+		if (Input.GetButtonDown ("Fire1")){
+			isDashing = true;
+			if(VelocityEnX>0){
+			gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, gameObject.GetComponent<Rigidbody2D> ().velocity.y);
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(dashForce, 0f),ForceMode2D.Impulse);
+			}
+			if(VelocityEnX<0){
+				gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, gameObject.GetComponent<Rigidbody2D> ().velocity.y);
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(-dashForce, 0f),ForceMode2D.Impulse);
+			}
+			StartCoroutine(WaitDash());
+		}
+
 		 else 
 			isMoving = false;
 	}
@@ -68,14 +85,20 @@ public float jumpForce = 5;
 
 	
 	}
-
-	public void Wait1(){
-		StartCoroutine(Wait());
-	}
+	
 
 	IEnumerator Wait() {
 		yield return new WaitForSeconds (1.5f);
-		PlayerMov.isHurt = false;
+		isHurt = false;
+	}
+
+	IEnumerator WaitDash() {
+		yield return new WaitForSeconds (1.5f);
+		isDashing = false;
+	}
+	IEnumerator WaitHurt() {
+		yield return new WaitForSeconds (1f);
+		isDashing = false;
 	}
 
 
@@ -88,12 +111,16 @@ public float jumpForce = 5;
 
 	// Update is called once per frame
 	void Update () {
-		if(isHurt == false){
+
+		VelocityEnX = GetComponent<Rigidbody2D> ().velocity.x;
+
+		if(isDashing == false){
 			movePlayer ();
 		}
 		if(!Position.isGrounded){ 
 			transform.parent = null;
 		}
+		Debug.Log (VelocityEnX);
 
 	}
 }

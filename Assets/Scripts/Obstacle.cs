@@ -18,6 +18,7 @@ public class Obstacle : MonoBehaviour
 		{	
 			exploded = true;
 			GameObject.Find("GameManager").GetComponent<GameManager>().life -= 1;
+			GameObject.Find("Monster").GetComponent<PlayerMov>().Hurt();
 			Debug.Log (GameObject.Find("GameManager").GetComponent<GameManager>().life);
 
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
