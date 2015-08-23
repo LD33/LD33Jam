@@ -3,9 +3,12 @@ using System.Collections;
 
 public class PlayerMov : MonoBehaviour {
 public float speed = 20;
+public float speedRun = 20;
+private float speed1;
 float horizontalAxis;
 Vector3 scaleX;
 public bool isMoving;
+public bool isRuning = false;
 float playerX;
 float playerY;
 public float jumpForce = 5;
@@ -47,10 +50,12 @@ public float jumpForce = 5;
 		}
 		if (Input.GetAxis ("Horizontal") != 0) {	
 			isMoving = true;
-			horizontalAxis = speed * Input.GetAxis ("Horizontal");
+			horizontalAxis = speed1 * Input.GetAxis ("Horizontal");
 			gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (horizontalAxis, gameObject.GetComponent<Rigidbody2D> ().velocity.y);
 			//FlipSprite ();
 		}
+		else 
+			isMoving = false;
 
 
 		if (Input.GetButtonDown ("Fire1")){
@@ -65,9 +70,14 @@ public float jumpForce = 5;
 			}
 			StartCoroutine(WaitDash());
 		}
+		if (Input.GetButton ("Fire2")) {
+			isRuning = true;
+			
+		}
+		else 
+			isRuning = false;
 
-		 else 
-			isMoving = false;
+		 
 	}
 
 	void FlipSprite(){
@@ -118,6 +128,14 @@ public float jumpForce = 5;
 		if(isDashing == false){
 			movePlayer ();
 		}
+
+		if(isRuning){
+			speed1 = speedRun;
+		}
+		if(isRuning==false){
+			speed1 = speed;
+		}
+
 		if(!Position.isGrounded){ 
 			transform.parent = null;
 		}

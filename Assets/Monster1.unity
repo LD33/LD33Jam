@@ -422,7 +422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  speedRun: 8
   isMoving: 0
+  isRuning: 0
   jumpForce: 5
   dashForce: 8
   isHurt: 0
