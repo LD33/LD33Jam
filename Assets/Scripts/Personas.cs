@@ -58,6 +58,11 @@ public class Personas : MonoBehaviour {
 			Physics2D.IgnoreCollision (GetComponent<Collider2D> (), hitcheck.GetComponent<Collider2D> ());
 			
 		}
+
+		if (hitcheck.name == "Monster") {
+			GameObject.Find("GameManager").GetComponent<GameManager>().GetScore();
+			Destroy(gameObject);
+		}
 	}
 
 

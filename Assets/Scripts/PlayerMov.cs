@@ -94,7 +94,6 @@ public float jumpForce = 5;
 		if(!Position.isGrounded){ 
 			transform.parent = null;
 		}
-		Debug.Log (GetComponent<Rigidbody2D> ().velocity.y);
 
 	}
 }
