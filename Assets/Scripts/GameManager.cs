@@ -10,9 +10,14 @@ public class GameManager : MonoBehaviour {
 	float min;
 	float sec;
 	float Score;
+
+	//Monster life
+	public int life;
+
 	// Use this for initialization
 	void Awake(){
 		startTime = Time.time;
+		life = 6; //initial life
 	}
 
 	public void GetScore(){
