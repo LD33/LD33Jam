@@ -367,12 +367,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4afa40c65dc8f47b61d0ac98e3e127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   isMoving: 0
   jumpForce: 5
   dashForce: 8
   isHurt: 0
   isDashing: 0
+  dashActiveMov: 1
   groundMovPlataform:
     serializedVersion: 2
     m_Bits: 0

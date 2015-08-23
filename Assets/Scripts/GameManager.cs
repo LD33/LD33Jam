@@ -85,8 +85,9 @@ public class GameManager : MonoBehaviour {
 			if (Combox2) {
 				ComboX2.text = "X2";
 			}
-		} else if (ComboOn == false) {
-			ScoreText.text = "";
+		} 
+		if (ComboOn == false) {
+			ComboCount.text = "";
 			ComboX2.text = "";
 		}
 	}

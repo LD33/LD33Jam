@@ -12,6 +12,7 @@ public float jumpForce = 5;
 	public float dashForce = 3;
 	public bool isHurt = false;
 	public bool isDashing = false;
+	public float dashActiveMov;
 	public LayerMask groundMovPlataform;
 	float VelocityEnY;
 	float VelocityEnX;
@@ -93,7 +94,7 @@ public float jumpForce = 5;
 	}
 
 	IEnumerator WaitDash() {
-		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (dashActiveMov);
 		isDashing = false;
 	}
 	IEnumerator WaitHurt() {
@@ -120,7 +121,7 @@ public float jumpForce = 5;
 		if(!Position.isGrounded){ 
 			transform.parent = null;
 		}
-		Debug.Log (VelocityEnX);
+		//Debug.Log (VelocityEnX);
 
 	}
 }
