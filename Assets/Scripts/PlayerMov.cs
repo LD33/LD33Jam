@@ -112,6 +112,11 @@ public float jumpForce = 5;
 		isDashing = false;
 	}
 
+	IEnumerator StartFixGame() {
+		yield return new WaitForSeconds (0.1f);
+		isDashing = false;
+	}
+
 
 	void OnCollisionEnter2D (Collision2D coll) {
 		if (coll.transform.tag == "MovingPlataform") 
@@ -120,7 +125,10 @@ public float jumpForce = 5;
 		}
 	}
 
-	// Update is called once per frame
+	void Start(){
+		isDashing = true;
+		StartCoroutine(StartFixGame());
+	}
 	void Update () {
 
 		VelocityEnX = GetComponent<Rigidbody2D> ().velocity.x;

@@ -7,8 +7,12 @@ public class GameManager : MonoBehaviour {
 	public Text ScoreText;
 	public Text ComboCount;
 	public Text ComboX2;
+	public Text ScoreEnd;
+	public GameObject StartUI;
+	public GameObject EndUI;
 	private float startTime;
 	public float ellapsedTime;
+	public float endGameTime;
 	float CountTime;
 	public float CountTimeValor;
 	float CountCombo;
@@ -46,6 +50,10 @@ public class GameManager : MonoBehaviour {
 		CountCombo1 ();
 		ComboText ();
 
+		if(ellapsedTime>=endGameTime){
+			EndGame();
+		}
+
 		ellapsedTime = Time.time - startTime;
 		min = Mathf.Floor((ellapsedTime/60f));
 		sec = (ellapsedTime % 60f);
@@ -54,6 +62,8 @@ public class GameManager : MonoBehaviour {
 		//TimeText.text = "Time " + min.ToString("0")+ ":" + sec.ToString("00");
 		TimeText.text = "Time " + min.ToString("0")+":" + sec.ToString("00");
 		ScoreText.text = "Score: " + Score.ToString("0000");
+
+
 	}
 
 	void CountTime1(){
@@ -91,5 +101,15 @@ public class GameManager : MonoBehaviour {
 			ComboX2.text = "";
 		}
 	}
+
+	void EndGame(){
+		ScoreEnd.text = "Your Score Is " + Score.ToString("0000");
+		StartUI.SetActive(false);
+		EndUI.SetActive(true);
+			Time.timeScale =0;
+
+		
+	}
+
 
 }
