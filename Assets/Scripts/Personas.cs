@@ -63,6 +63,17 @@ public class Personas : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManager>().GetScore();
 			Destroy(gameObject);
 		}
+
+		if (hitcheck.tag == "Limit") {
+			if (RandomN == 2) {
+				RandomN = 1;
+			}
+			else if (RandomN == 1) {
+				RandomN = 2;
+			}
+
+		}
+
 	}
 
 
