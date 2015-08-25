@@ -52,7 +52,7 @@ public float jumpForce = 5;
 			isMoving = true;
 			horizontalAxis = speed1 * Input.GetAxis ("Horizontal");
 			gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (horizontalAxis, gameObject.GetComponent<Rigidbody2D> ().velocity.y);
-			//FlipSprite ();
+			FlipSprite ();
 		}
 		else 
 			isMoving = false;
@@ -85,12 +85,12 @@ public float jumpForce = 5;
 		scaleX = transform.localScale;
 		if (Input.GetAxis("Horizontal") > 0)
 		{
-			scaleX.x = 1;
+			scaleX.x = 0.4f;
 			transform.localScale = scaleX;
 		}
 		else if (Input.GetAxis("Horizontal") < 0)
 		{
-			scaleX.x = -1;
+			scaleX.x = -0.4f;
 			transform.localScale = scaleX;
 		}
 
